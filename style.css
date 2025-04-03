@@ -1,9 +1,9 @@
 :root {
-  --primary-color: #003366;
-  --accent-color: #0059b3;
-  --text-color: #333;
-  --bg-color: #f4f4f4;
-  --input-bg: #ffffff;
+  --primary-color: #3B2F63;    /* deep eggplant purple for nav/header buttons */
+  --accent-color: #F9A825;     /* golden amber for buttons or highlights */
+  --text-color: #2C2C2C;       /* dark gray instead of harsh black */
+  --bg-color: #F5F5F5;         /* light off-white/gray */
+  --input-bg: #ffffff;         /* clean white input fields */
 }
 
 * {
@@ -23,19 +23,20 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: white;
+  background-color: var(--accent-color);
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 header .logo {
   font-size: 1.5rem;
   font-weight: bold;
+  color: var(--primary-color)
 }
 
 header nav a {
   margin-left: 1.5rem;
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--primary-color);
   font-weight: 500;
 }
 
@@ -57,7 +58,7 @@ header nav a {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.3); /* dark overlay */
-  backdrop-filter: blur(0px); /* apply blur */
+  backdrop-filter: blur(4px); /* apply blur */
 }
 
 .hero-content {
@@ -80,4 +81,48 @@ header nav a {
   outline: none;
 }
 
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
 
+.search-container input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  width: 300px;
+  border-radius: 8px 0 0 8px;
+  border: none;
+  outline: none;
+}
+
+.search-icon {
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  background-color: white;
+  color: #555;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  border-left: 1px solid #ccc;
+}
+
+.hero-buttons {
+  margin-top: 0.5rem;
+}
+
+.hero-buttons .secondary {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  margin: 0 0.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.hero-buttons .secondary:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
