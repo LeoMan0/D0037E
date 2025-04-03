@@ -126,3 +126,18 @@ header nav a {
 .hero-buttons .secondary:hover {
   background-color: rgba(255, 255, 255, 1);
 }
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.logo img {
+  height: 32px;
+  width: 32px;
+  widtha: auto;
+  margin-right: 0.5rem;
+}

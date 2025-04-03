@@ -1,8 +1,10 @@
 :root {
-  --accent-color: #0059b3;
-  --bg-color: #f9f9f9;
-  --text-color: #333;
-  --card-bg: #ffffff;
+  --primary-color: #3B2F63;     /* Deep purple - header/nav */
+  --accent-color: #F9A825;      /* Amber - for highlights/buttons only */
+  --card-bg: #FFFDF6;           /* Soft off-white with a warm tint */
+  --sidebar-bg: #F5F3EB;        /* Muted beige/gray for filters */
+  --text-color: #2C2C2C;
+  --bg-color: #FAFAFA;          /* Light background */
 }
 
 body {
@@ -11,13 +13,12 @@ body {
   margin: 0;
   color: var(--text-color);
 }
-
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: white;
+  background-color: var(--accent-color);
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -29,7 +30,7 @@ header .logo {
 header nav a {
   margin-left: 1.5rem;
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--primary-color);
   font-weight: 500;
 }
 
@@ -42,7 +43,7 @@ header nav a {
 /* Sidebar */
 .sidebar {
   width: 250px;
-  background: white;
+  background: var(--sidebar-bg);
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
@@ -85,18 +86,34 @@ header nav a {
 
 .listing-card {
   display: flex;
-  background: var(--card-bg);
+  background: var(--card-color);
+  border-left: 75px solid var(--accent-color);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  height: 256px;
 }
 
 .listing-card img {
-  width: 180px;
-  height: 140px;
+  width: 256px;
+  height: 256px;
   object-fit: cover;
 }
 
 .listing-card .details {
   padding: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.logo img {
+  height: 32px;
+  width: 32px;
+  margin-right: 0.5rem;
 }
