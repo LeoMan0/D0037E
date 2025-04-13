@@ -9,58 +9,44 @@
 <body>
 
 
-    <div id="app">
+  <div id="app">
     <!-- ✅ Vue header component -->
     <site-header></site-header>
 
-  <main class="listing-layout">
-    <aside class="sidebar">
-      <h2>Filter</h2>
-      <form>
-        <label>Property Type:</label>
-        <select>
-          <option>All Types</option>
-          <option>House</option>
-          <option>Condo</option>
-        </select>
+    <main class="listing-layout">
+      <aside class="sidebar">
+        <h2>Filter</h2>
+        <form>
+          <label>Property Type:</label>
+          <select>
+            <option>All Types</option>
+            <option>House</option>
+            <option>Condo</option>
+          </select>
 
-        <label>Min Price:</label>
-        <input type="number" placeholder="e.g. 500000">
+          <label>Min Price:</label>
+          <input type="number" placeholder="e.g. 500000">
 
-        <label>Max Price:</label>
-        <input type="number" placeholder="e.g. 1500000">
+          <label>Max Price:</label>
+          <input type="number" placeholder="e.g. 1500000">
 
-        <label>Bedrooms:</label>
-        <input type="number" placeholder="e.g. 3">
+          <label>Bedrooms:</label>
+          <input type="number" placeholder="e.g. 3">
 
-        <label>ZIP Code:</label>
-        <input type="text" placeholder="e.g. 98102">
+          <label>ZIP Code:</label>
+          <input type="text" placeholder="e.g. 98102">
 
-        <button type="submit">Search</button>
-      </form>
-    </aside>
+          <button type="submit">Search</button>
+        </form>
+      </aside>
 
-    <section class="listings">
-      <div class="listing-card">
-        <img src="./trend1.jpg" alt="House 1">
-        <div class="details">
-          <h3>Capitol Hill – $850,000</h3>
-          <p>3 Bed • 2 Bath • 98102</p>
-        </div>
-      </div>
+        <section class="listings">
+            <property-list :listings="listings"></property-list>
+        </section>
+      </main>
+  </div>
 
-      <div class="listing-card">
-        <img src="./trend2.jpg" alt="House 2">
-        <div class="details">
-          <h3>Queen Anne – $1,250,000</h3>
-          <p>4 Bed • 3 Bath • 98109</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-
+</body>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="components.js"></script>
-</body>
 </html>

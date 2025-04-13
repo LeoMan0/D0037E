@@ -9,33 +9,29 @@
 </head>
 
 <body>
-
-
-    <div id="app">
+  <div id="app">
     <!-- ✅ Vue header component -->
     <site-header></site-header>
 
-
-  <section class="hero">
-    <div class="hero-content">
-      <h1>House Spy</h1>
-  
-      <div class="search-container">
-        <input type="text" placeholder="Search ZIP, city or neighborhood">
-        <button class="search-icon">🔍</button>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>House Spy</h1>
+    
+        <div class="search-container">
+          <input type="text" placeholder="Search ZIP, city or neighborhood">
+          <button class="search-icon">🔍</button>
+        </div>
+    
+        <div class="hero-buttons">
+          <button class="secondary">Advanced Search</button>
+          <button class="secondary" onclick="location.href='trending.html'">Trending Homes</button>
+        </div>
       </div>
-  
-      <div class="hero-buttons">
-        <button class="secondary">Advanced Search</button>
-        <button class="secondary" onclick="location.href='trending.html'">Trending Homes</button>
-      </div>
-    </div>
-  </section>
+    </section>
 
-
+  </div>
+</body>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="components.js"></script>
-
-</body>
 </html>
 
