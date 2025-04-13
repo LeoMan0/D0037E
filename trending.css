@@ -13,26 +13,6 @@ body {
   margin: 0;
   color: var(--text-color);
 }
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: var(--accent-color);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-header .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-header nav a {
-  margin-left: 1.5rem;
-  text-decoration: none;
-  color: var(--primary-color);
-  font-weight: 500;
-}
 
 .listing-layout {
   display: flex;
@@ -102,18 +82,4 @@ header nav a {
 
 .listing-card .details {
   padding: 1rem;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--primary-color);
-}
-
-.logo img {
-  height: 32px;
-  width: 32px;
-  margin-right: 0.5rem;
 }

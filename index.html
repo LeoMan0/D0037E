@@ -3,22 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>House Spy</title>
+  <link rel="stylesheet" href="shared.css">
   <link rel="stylesheet" href="style.css">
+  
 </head>
 
 <body>
 
-<header>
-  <div class="logo">
-    <img src="Logo.png" alt="House Spy Logo">
-    <span>House Spy</span>
-  </div>
-  <nav>
-    <a href="#">Buy</a>
-    <a href="#">Sell</a>
-    <a href="#">About</a>
-  </nav>
-</header>
+
+    <div id="app">
+    <!-- ✅ Vue header component -->
+    <site-header></site-header>
+
+
   <section class="hero">
     <div class="hero-content">
       <h1>House Spy</h1>
@@ -34,6 +31,10 @@
       </div>
     </div>
   </section>
+
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="components.js"></script>
 
 </body>
 </html>
