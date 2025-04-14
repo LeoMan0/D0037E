@@ -11,39 +11,61 @@
 
   <div id="app">
     <!-- ✅ Vue header component -->
+    <!--  Sort by Price Assencding Dessendinc or Build Year 
+          Show only results conatining ZIP
+          Show only results conating between X-Y amount bedrooms
+          Show only results conating between X-Y sqM
+    -->
     <site-header></site-header>
 
     <main class="listing-layout">
       <aside class="sidebar">
         <h2>Filter</h2>
-        <form>
-          <label>Property Type:</label>
-          <select>
-            <option>All Types</option>
-            <option>House</option>
-            <option>Condo</option>
-          </select>
 
-          <label>Min Price:</label>
-          <input type="number" placeholder="e.g. 500000">
-
-          <label>Max Price:</label>
-          <input type="number" placeholder="e.g. 1500000">
-
-          <label>Bedrooms:</label>
-          <input type="number" placeholder="e.g. 3">
-
+        <form @submit.prevent="doSearch">
           <label>ZIP Code:</label>
-          <input type="text" placeholder="e.g. 98102">
-
+          <input type="text" v-model="formZip" placeholder="e.g. 98105">
+        
+          <label>Bedrooms Min:</label>
+          <input type="number" v-model.number="formBedroomsMin" placeholder="Min">
+        
+          <label>Bedrooms Max:</label>
+          <input type="number" v-model.number="formBedroomsMax" placeholder="Max">
+        
+          <label>SqM Min:</label>
+          <input type="number" v-model.number="formSqMMin" placeholder="Min">
+        
+          <label>SqM Max:</label>
+          <input type="number" v-model.number="formSqMMax" placeholder="Max">
+        
+          <label>Sort By:</label>
+          <select v-model="formSortBy">
+            <option value="">None</option>
+            <option value="price">Price</option>
+            <option value="year">Build Year</option>
+          </select>
+        
+          <label>Sort Order:</label>
+          <select v-model="formSortOrder">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        
           <button type="submit">Search</button>
         </form>
       </aside>
 
         <section class="listings">
-            <property-list :listings="listings"></property-list>
+            <property-list :listings="paginatedListings"></property-list>
         </section>
       </main>
+
+    <div class="pagination-controls">
+      <button @click="currentPage--" :disabled="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button @click="currentPage++" :disabled="currentPage === totalPages">Next</button>
+    </div>
+
   </div>
 
 </body>

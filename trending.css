@@ -83,3 +83,14 @@ body {
 .listing-card .details {
   padding: 1rem;
 }
+
+.details h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.details p {
+  font-size: 0.95rem;
+  color: #555;
+}
