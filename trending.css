@@ -94,3 +94,37 @@ body {
   font-size: 0.95rem;
   color: #555;
 }
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.pagination-controls button {
+  width: 48px;         /* Fixed width */
+  height: 48px;        /* Fixed height */
+  padding: 0;          /* No extra spacing */
+  font-size: 1rem;     /* Consistent text size */
+  text-align: center;  /* Center the text horizontally */
+  line-height: 48px;   /* Center text vertically */
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.pagination-controls button.active {
+  font-weight: bold;
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.pagination-controls button.ellipsis {
+  cursor: default;
+  color: #aaa;
+}

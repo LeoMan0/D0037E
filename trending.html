@@ -60,12 +60,12 @@
         </section>
       </main>
 
-    <div class="pagination-controls">
-      <button @click="currentPage--" :disabled="currentPage === 1">Previous</button>
-      <span>Page {{ currentPage }} of {{ totalPages }}</span>
-      <button @click="currentPage++" :disabled="currentPage === totalPages">Next</button>
-    </div>
 
+    <pagination-controls
+      :current-page="currentPage"
+      :total-pages="totalPages"
+        @page-change="setPage">
+    </pagination-controls>
   </div>
 
 </body>
