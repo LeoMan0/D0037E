@@ -5,16 +5,6 @@ const app = Vue.createApp({
       currentPage: 1,
       itemsPerPage: 5,
 
-      // Filters and search
-      sortBy: '',
-      sortOrder: 'asc',
-      filterZip: '',
-      filterBedroomsMin: null,
-      filterBedroomsMax: null,
-      filterSqMMin: null,
-      filterSqMMax: null,
-
-
       formZip: '',
       formBedroomsMin: null,
       formBedroomsMax: null,
@@ -28,76 +18,45 @@ const app = Vue.createApp({
   },
 
   created() {
-    fetch('listings.json')
-      .then(res => res.json())
-      .then(data => {
-        this.listings = data;
-      });
+    this.fetchListings();
   },
 
   computed: {
-    filteredListings() {
-      if (!this.searchTriggered) return this.listings;
-
-      let result = [...this.listings];
-
-      // Exact ZIP match
-      if (this.filterZip) {
-        result = result.filter(h => h.zip_code.toString() === this.filterZip);
-      }
-
-      // Bedrooms
-      if (this.filterBedroomsMin !== null && this.filterBedroomsMin !== '') {
-        result = result.filter(h => h.Bedrooms >= this.filterBedroomsMin);
-      }
-      if (this.filterBedroomsMax !== null && this.filterBedroomsMax !== '') {
-        result = result.filter(h => h.Bedrooms <= this.filterBedroomsMax);
-      }
-
-      // SqM
-      if (this.filterSqMMin !== null && this.filterSqMMin !== '') {
-        result = result.filter(h => h.SqMTotLiving >= this.filterSqMMin);
-      }
-      if (this.filterSqMMax !== null && this.filterSqMMax !== '') {
-        result = result.filter(h => h.SqMTotLiving <= this.filterSqMMax);
-      }
-
-      // Sorting
-      if (this.sortBy === 'price') {
-        result.sort((a, b) => this.sortOrder === 'asc'
-          ? a.SalePrice - b.SalePrice
-          : b.SalePrice - a.SalePrice);
-      } else if (this.sortBy === 'year') {
-        result.sort((a, b) => this.sortOrder === 'asc'
-          ? a.YrBuilt - b.YrBuilt
-          : b.YrBuilt - a.YrBuilt);
-      }
-
-      return result;
-    },
-
     paginatedListings() {
       const start = (this.currentPage - 1) * this.itemsPerPage;
       const end = start + this.itemsPerPage;
-      return this.filteredListings.slice(start, end);
+      return this.listings.slice(start, end);
     },
 
     totalPages() {
-      return Math.ceil(this.filteredListings.length / this.itemsPerPage);
+      return Math.ceil(this.listings.length / this.itemsPerPage);
     }
   },
 
   methods: {
+    fetchListings() {
+        const params = new URLSearchParams();
+    
+        if (this.formZip) params.append("zip", this.formZip);
+        if (this.formBedroomsMin) params.append("min_bedrooms", this.formBedroomsMin);
+        if (this.formBedroomsMax) params.append("max_bedrooms", this.formBedroomsMax);
+        if (this.formSqMMin) params.append("min_sqm", this.formSqMMin);
+        if (this.formSqMMax) params.append("max_sqm", this.formSqMMax);
+        if (this.formSortBy) params.append("sort_by", this.formSortBy);
+        if (this.formSortOrder) params.append("order", this.formSortOrder);
+    
+        fetch(`http://localhost:5000/api/listings?${params.toString()}`)
+          .then(res => res.json())
+          .then(data => {
+            this.listings = data;
+            this.currentPage = 1;
+            this.searchTriggered = true;
+          })
+          .catch(err => console.error("API error:", err));
+      },
+
     doSearch() {
-      this.searchTriggered = true;
-      this.currentPage = 1;
-      this.filterZip = this.formZip;
-      this.filterBedroomsMin = this.formBedroomsMin;
-      this.filterBedroomsMax = this.formBedroomsMax;
-      this.filterSqMMin = this.formSqMMin;
-      this.filterSqMMax = this.formSqMMax;
-      this.sortBy = this.formSortBy;
-      this.sortOrder = this.formSortOrder;
+      this.fetchListings();
     },
     resetPage() {
       this.currentPage = 1;
