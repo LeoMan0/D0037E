@@ -19,7 +19,15 @@ const app = Vue.createApp({
   },
 
   created() {
-    this.fetchListings();
+    const zipFromStorage = localStorage.getItem('zipSearchValue');
+    if (zipFromStorage) {
+      this.formZip = zipFromStorage;
+      this.doSearch();
+      localStorage.removeItem('zipSearchValue');
+    }
+    else {
+      this.fetchListings();
+    }
   },
 
   computed: {
@@ -81,9 +89,8 @@ app.component('site-header', {
   	</div>
   	<nav>
     	<a href="index.html">Home</a>
-    	<a href="#">Buy</a>
-    	<a href="#">Sell</a>
     	<a href="#">About</a>
+    	<a href="#">Contact</a>
   	</nav>
 	</header>
   `
@@ -121,7 +128,7 @@ app.component('pagination-controls', {
     pagesToShow() {
       const pages = [];
   
-      const maxPagesToShow = 7;
+      const maxPagesToShow = 5;
 
       if (this.totalPages <= maxPagesToShow) {
         for (let i = 1; i <= this.totalPages; i++) {

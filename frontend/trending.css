@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   --primary-color: #3B2F63;     /* Deep purple - header/nav */
   --accent-color: #F9A825;      /* Amber - for highlights/buttons only */
@@ -12,12 +18,14 @@ body {
   background: var(--bg-color);
   margin: 0;
   color: var(--text-color);
+  overflow-x: hidden;
 }
 
 .listing-layout {
   display: flex;
-  padding: 2rem;
+  padding: 2rem;      /* 2rem on all sides to match header */
   gap: 2rem;
+  width: 100%;        /* span full viewport */
 }
 
 /* Sidebar */
@@ -61,6 +69,7 @@ body {
 .listings {
   flex: 1;
   display: grid;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
@@ -72,6 +81,7 @@ body {
   overflow: hidden;
   box-shadow: 0 1px 6px rgba(0,0,0,0.05);
   height: 256px;
+  width: 100%;
 }
 
 .listing-card img {
@@ -82,6 +92,9 @@ body {
 
 .listing-card .details {
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .details h3 {
@@ -101,6 +114,7 @@ body {
   gap: 0.5rem;
   margin-top: 2rem;
   flex-wrap: wrap;
+  margin-bottom: 3rem;
 }
 
 .pagination-controls button {
@@ -127,4 +141,56 @@ body {
 .pagination-controls button.ellipsis {
   cursor: default;
   color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .listing-layout {
+    flex-direction: column-reverse;
+    padding: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    order: 2;
+
+  }
+
+  .listings {
+    grid-template-columns: 1fr;
+    order: 1;
+  }
+
+  .listing-card {
+    align-items: center;
+    width: 100%;
+    height: 128px;           /* let it size to content */
+  }
+  .listing-card img {
+    width: 128px;
+    height: 128px;
+    display: block;
+  }
+
+  .listing-card .details {
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  .pagination-controls {
+    order: 3;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .sidebar form {
+    gap: 1rem;
+  }
+
+  .sidebar input,
+  .sidebar select,
+  .sidebar button {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }

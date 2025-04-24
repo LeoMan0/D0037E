@@ -8,6 +8,18 @@
   
 </head>
 
+<script>
+  function searchByZip() {
+    const zip = document.getElementById('zipSearch').value;
+    if (zip) {
+      localStorage.setItem('zipSearchValue', zip);
+      window.location.href = 'trending.html';
+    }else{
+      window.location.href = 'trending.html';
+    }
+  }
+</script>
+
 <body>
   <div id="app">
     <!-- ✅ Vue header component -->
@@ -18,12 +30,12 @@
         <h1>House Spy</h1>
     
         <div class="search-container">
-          <input type="text" placeholder="Search ZIP, city or neighborhood">
-          <button class="search-icon">🔍</button>
+          <input type="text" id="zipSearch" placeholder="Search ZIP">
+          <button class="search-icon" onclick="searchByZip()">🔍</button>
         </div>
     
         <div class="hero-buttons">
-          <button class="secondary">Advanced Search</button>
+          <button class="secondary">Statistics</button>
           <button class="secondary" onclick="location.href='trending.html'">Trending Homes</button>
         </div>
       </div>
