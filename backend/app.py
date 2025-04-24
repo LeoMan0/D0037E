@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import sqlite3
 
@@ -9,9 +9,9 @@ CORS(app)
 conn = sqlite3.connect("HouseSalesSeattle.db", check_same_thread=False)
 cursor = conn.cursor()
 
-@app.route("/")
-def home():
-    return "✅ Flask backend is running."
+@app.route('/images/<filename>')
+def serve_image(filename):
+    return send_from_directory('houseImages/256x256/', filename)
 
 @app.route("/api/listings")
 def get_listings():

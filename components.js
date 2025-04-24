@@ -69,12 +69,6 @@ const app = Vue.createApp({
   }
   }
 
-  
- // watch: {
- // currentPage(newPage) {
- //     this.fetchListings();
- // }
- // }
 });
 
 
@@ -105,7 +99,7 @@ app.component('property-list', {
         class="listing-card"
       >
         <img
-          :src="'houseImages/' + listing.Image + '.jpg'"
+          :src="'http://localhost:5000/images/' + listing.Image + '.jpg'"
           :alt="'House ' + listing.SalesID"
           class="listing-image"
         >
@@ -118,52 +112,60 @@ app.component('property-list', {
   `
 });
 
+
 app.component('pagination-controls', {
   props: ['currentPage', 'totalPages'],
   emits: ['page-change'],
+
   computed: {
     pagesToShow() {
-      const totalShown = 7; // number of buttons total (including first/last, ellipses, etc.)
       const pages = [];
+  
+      const maxPagesToShow = 7;
 
-      // Always show the first page
-      pages.push(1);
-
-      let start = Math.max(2, this.currentPage - 2);
-      let end = Math.min(this.totalPages - 1, this.currentPage + 2);
-
-      // Adjust window if at the start
-      if (this.currentPage <= 4) {
-        start = 2;
-        end = Math.min(this.totalPages - 1, 6);
+      if (this.totalPages <= maxPagesToShow) {
+        for (let i = 1; i <= this.totalPages; i++) {
+          pages.push(i);
+        }
+        return pages;
       }
 
-      // Adjust window if near the end
-      if (this.currentPage >= this.totalPages - 3) {
-        start = Math.max(2, this.totalPages - 5);
+      let middleCount = maxPagesToShow - 2;
+      let start = this.currentPage - Math.floor(middleCount / 2);
+      let end = this.currentPage + Math.floor(middleCount / 2);
+  
+      if (start < 2) {
+        end += (2 - start);
+        start = 2;
+      }
+  
+      if (end > this.totalPages - 1) {
+        start -= (end - this.totalPages + 1);
         end = this.totalPages - 1;
       }
+  
+      start = Math.max(start, 2);
+      end = Math.min(end, this.totalPages - 1);
 
+      pages.push(1)
       for (let i = start; i <= end; i++) {
         pages.push(i);
       }
-
-      // Always show the last page
-      if (this.totalPages > 1) pages.push(this.totalPages);
-
+      pages.push(this.totalPages);
+  
       return pages;
     }
   },
-  template: `
+
+    template: `
     <div class="pagination-controls">
       <button @click="$emit('page-change', currentPage - 1)" :disabled="currentPage === 1">Prev</button>
 
       <button
         v-for="page in pagesToShow"
         :key="page"
-        :class="{ active: page === currentPage, ellipsis: page === '...' }"
+        :class="{ active: page === currentPage }"
         @click="$emit('page-change', page)"
-        :disabled="page === '...'"
       >
         {{ page }}
       </button>
