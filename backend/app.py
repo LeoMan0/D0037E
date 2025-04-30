@@ -1,13 +1,22 @@
 from flask import Flask, jsonify, request, send_from_directory
-from flask_cors import CORS
+#from flask_cors import CORS
 import sqlite3
 
-app = Flask(__name__)
-CORS(app)
+app = Flask(__name__, static_folder="frontend", static_url_path="")
+#CORS(app)
 
 # Connect to SQLite database
 conn = sqlite3.connect("HouseSalesSeattle.db", check_same_thread=False)
 cursor = conn.cursor()
+
+#Servering the frontend
+@app.route("/")
+def serve_frontend():
+    return send_from_directory("frontend", "index.html")
+
+@app.route("/<path:path>")
+def serve_static_file(path):
+    return send_from_directory("frontend", path)
 
 @app.route('/images/<filename>')
 def serve_image(filename):

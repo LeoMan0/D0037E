@@ -52,7 +52,7 @@ const app = Vue.createApp({
         if (this.formSortBy) params.append("sort_by", this.formSortBy);
         if (this.formSortOrder) params.append("order", this.formSortOrder);
     
-        fetch(`http://localhost:5000/api/listings?page=${this.currentPage}&limit=${this.itemsPerPage}&${params.toString()}`)
+        fetch(`/api/listings?page=${this.currentPage}&limit=${this.itemsPerPage}&${params.toString()}`)
           .then(res => res.json())
           .then(data => {
             this.listings = data.results;
@@ -106,7 +106,7 @@ app.component('property-list', {
         class="listing-card"
       >
         <img
-          :src="'http://localhost:5000/images/' + listing.Image + '.jpg'"
+          :src="'/images/' + listing.Image + '.jpg'"
           :alt="'House ' + listing.SalesID"
           class="listing-image"
         >
